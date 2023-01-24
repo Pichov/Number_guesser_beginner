@@ -1,0 +1,40 @@
+import random
+
+num_max = 20
+num_min = 0
+win = False
+play_again = False
+num_correct = random.randint(num_min, num_max)
+print(f"Let's play a guessing game! The number you have to guess ranges from {num_min} to {num_max}. Have fun!")
+
+
+def number_guessing_game(number):
+    global win
+    global play_again
+    while not win:
+        num_guess = input("\nGuess a number: ")
+        if num_guess.isdigit():
+            if int(num_guess) == num_correct:
+                print("Congratulations! You guessed correctly. ")
+                win = True
+            elif int(num_guess) < num_correct:
+                print("The correct number is larger than your guess. Try again.")
+            elif int(num_guess) > num_correct:
+                print("The correct number is smaller than your guess. Try again")
+        else:
+            print("You have not entered a digit.")
+    return play_again
+
+
+number_guessing_game(num_correct)
+
+
+while win:
+    play_again = input("Do you want to play again? (yes/no) ")
+    if play_again in "yes":
+        win = False
+        num_correct = random.randint(num_min, num_max)
+        number_guessing_game(num_correct)
+    else:
+        print("\nThank you for playing!")
+        break
